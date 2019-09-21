@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+{% block content %}
+<!-- TODO 
+    タグ、日付、再生数のフォーム(デフォルト値を設定しておく)
+
+-->
+<h2>ニコ動簡易タグ検索ツール</h2>
+
+<form action="/dev" method="get">
+  <div>
+    <label for="keyword">タグ: </label>
+    <input type="text" id="keyword" name="keyword" value="{{ keyword }}"> (検索したいタグ)
+  </div>
+  <div>
+    <label for="viewCounter">再生数: </label>
+    <input type='number' id="viewCounter" name="viewCounter" value="{{ viewCounter }}"}> (指定した再生数以上で検索)<br>
+  </div>
+  <div>
+    <label for="starttime">日付: </label>
+    <input type='date' id="starttime" name="starttime" value="{{ starttime }}"> (指定した日から今日まで検索)<br>
+
+  </div>
+
+  <div class="button">
+    <button type="submit">検索</button>
+  </div>
+</div>
+
+</form>
+
+<hr>
+{% if keyword %}
+タグ 「{{ keyword }}」 を含む動画: {{ res|count}} 件
+
+
+<ul>
+{% for r in res %}
+    <hr>
+    <li><a href={{"http://nico.ms/" + r.contentId}} target="_blank" ><img src= {{ r.thumbnailUrl }}> </a></li>
+    <ul>
+        <p><a href={{"http://nico.ms/" + r.contentId}} target="_blank" > {{ r.title}} </a></p>
+        <li>投稿日時: {{ r.startTime[:10]}}</li>
+        <li>再生数: {{ r.viewCounter}}</li>
+        <li>コメント数: {{ r.commentCounter}} </li>
+        <li>マイリス数: {{ r.mylistCounter}} </li>
+    </ul>
+{% endfor %}
+</ul>
+{% else %}
+set search keyword
+{% endif %}
+{% endblock %}
