@@ -156,3 +156,4 @@ $RECYCLE.BIN/
 
 Lib/*
 pyenv.cfg
+Scripts/*
