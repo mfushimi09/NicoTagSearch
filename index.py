@@ -8,7 +8,7 @@ app = Flask(__name__)
 @app.route('/')
 def hello():
 
-    keyword = request.args.get('keyword') if request.args.get('keyword')  else "艦これMMD"
+    keyword = request.args.get('keyword') if request.args.get('keyword')  else "ボイロ"
     viewCounter = request.args.get('viewCounter') if request.args.get('viewCounter')  else "10000"
     # starttime = (datetime.today() + timedelta(days=-30) ).strftime("%Y-%m-%d") # from this day
     starttime = request.args.get('starttime')
